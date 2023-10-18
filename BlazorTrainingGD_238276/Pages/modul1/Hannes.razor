@@ -1,0 +1,11 @@
+﻿@page "/hannes"
+<h3>@Titel</h3>
+<button @onclick="hannesclick">click</button>
+<div></div>
+@code {
+    string Titel="Hannes";
+    void hannesclick()
+    {
+        Titel = "Preishuber-Pflügl";
+    }
+}
