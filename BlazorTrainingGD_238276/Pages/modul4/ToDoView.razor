@@ -1,0 +1,57 @@
+﻿@page "/todo"
+@inject IHttpClientFactory client
+<h3>ToDoView</h3>
+<div class="row">
+    <div class="col">
+
+
+        <div class="input-group mb-3">
+
+            <input type="text" class="form-control" @bind="Eingabe" @bind:event="oninput" />
+            <button class="btn btn-outline-secondary">Suche</button>
+
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+
+        <div class="row">
+            <div class="col">
+                <ul class="list-group list-group-flush">
+                    @if (Liste == null)
+                    {
+                        <li class="list-group-item">
+                            keine Daten
+
+                        </li>
+                    }
+                    else
+                    {
+                        @foreach (var item in Liste.todos.Where(x => x.todo.Contains(Eingabe, StringComparison.InvariantCultureIgnoreCase)))
+                        {
+                            <li class="list-group-item">
+                                @item.todo
+
+                            </li>
+                        }
+                    }
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    string Eingabe = "";
+    TodoModel Liste;
+    protected override async Task OnInitializedAsync()
+    {
+        using (var http = client.CreateClient())
+        {
+            Liste = await http.GetFromJsonAsync<TodoModel>("https://dummyjson.com/todos?limit=150");
+        }
+
+    }
+}
