@@ -1,0 +1,20 @@
+﻿@page "/attr"
+
+<h3>Attr</h3>
+@Wert
+<input @bind="Wert" @ref="input1" />
+<button @onclick="click"></button>
+<div @onclick="click" class="btn btn-info" >eins</div>
+<div>zwei</div>
+<span>eins</span><span>zwei</span>
+<p></p>
+<Component @ref="comp1"></Component>
+@code {
+    Component comp1;
+    ElementReference input1;
+    string Wert;
+    void click()
+    {
+        input1.FocusAsync();
+    }
+}
