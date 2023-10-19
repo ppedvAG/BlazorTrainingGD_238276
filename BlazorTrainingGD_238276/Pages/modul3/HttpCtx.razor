@@ -1,0 +1,11 @@
+﻿@page "/ctx"
+@inject IHttpContextAccessor _ctx
+<h3>HttpCtx</h3>
+
+
+@_ctx.HttpContext.Request.Headers.AcceptLanguage
+
+
+@code {
+
+}
