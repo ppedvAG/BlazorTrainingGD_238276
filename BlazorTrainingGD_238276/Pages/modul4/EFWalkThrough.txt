@@ -1,0 +1,11 @@
+﻿Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 7.0.12
+Install-Package Microsoft.EntityFrameworkCore.Tools -Version 7.0.12
+Install-Package Microsoft.EntityFrameworkCore.Design -Version 7.0.12
+
+
+Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True
+
+ scaffold-dbcontext "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+ builder.Services.AddDbContext<NorthwindContext>(
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("northwind")));

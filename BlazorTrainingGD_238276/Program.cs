@@ -1,7 +1,9 @@
 using BlazorTrainingGD_238276.Data;
+using BlazorTrainingGD_238276.Models;
 using BlazorTrainingGD_238276.Pages.modul4;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<ChatVM>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
+builder.Services.AddDbContext<NorthwindContext>(
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("northwind")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
