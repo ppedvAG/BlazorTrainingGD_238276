@@ -1,0 +1,20 @@
+﻿@page "/nav"
+@page "/nav1"
+@inject NavigationManager navman
+<h3>Nav</h3>
+@navman.Uri
+<a href="/nav1">nav1</a>
+
+@code {
+    protected override void OnInitialized()
+    {
+        navman.LocationChanged += komischeMethode;
+    }
+
+    void komischeMethode(object sender,LocationChangedEventArgs args)
+    {
+     
+
+    }
+
+}
