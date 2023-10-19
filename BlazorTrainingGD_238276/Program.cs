@@ -1,4 +1,5 @@
 using BlazorTrainingGD_238276.Data;
+using BlazorTrainingGD_238276.Pages.modul4;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<ChatVM>();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
