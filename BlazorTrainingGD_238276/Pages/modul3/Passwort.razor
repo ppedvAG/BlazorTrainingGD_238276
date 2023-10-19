@@ -12,11 +12,18 @@
         <button class="btn btn-outline-warning" @onclick="save"><i class="oi oi-account-login"></i> save</button>
     </div>
 </div>
+@if (IsSaved)
+{
+   <div class="alert alert-primary" role="alert">
+   Saved!
+</div> 
+}
 
 
 @code {
     string Eingabe;
-
+    bool IsSaved;
+    ValueTask IsFertig;
     protected override async Task OnInitializedAsync()
     {
 
@@ -35,8 +42,11 @@
 
         }
     }
-    void save()
+    async Task save()
     {
-        pls.SetAsync("hannes", Eingabe);
+       IsFertig=  pls.SetAsync("hannes", Eingabe);
+        IsSaved = true; 
+
+      
     }
 }
