@@ -1,0 +1,14 @@
+﻿@page "/jsevents"
+<h3>JSEvents</h3>
+<input @bind="Wert" @bind:event="oninput"/>
+@Wert
+<div @onclick="click">
+    <div @onclick="click" @onclick:stopPropagation></div>
+</div>
+@code {
+    string Wert;
+    void click()
+    {
+        
+    }
+}
