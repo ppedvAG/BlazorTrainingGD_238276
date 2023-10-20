@@ -5,6 +5,7 @@
 <button @onclick="click1">Localstorage </button>
 <button @onclick="click2">window. </button>
 <button @onclick="click3">module </button>
+<button @onclick="click4">lib </button>
 @ausgabe
 @code {
     void click()
@@ -24,16 +25,24 @@
     string ausgabe;
     async Task click3()
     {
-     
-      ausgabe= await  module.InvokeAsync<string>("hannes", "nachricht");
+
+        ausgabe= await  module.InvokeAsync<string>("hannes", "nachricht");
     }
     IJSObjectReference module;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-          module= await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./pages/modul8/JSComponent.razor.js");
+            module= await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./pages/modul8/JSComponent.razor.js");
         }
+    }
+
+    async Task click4()
+    {
+
+        var lib = new RazorClassLibrary1.ExampleJsInterop(JsRuntime);
+        ausgabe= await lib.Prompt("Hallo Welt");
+
     }
 
 }
