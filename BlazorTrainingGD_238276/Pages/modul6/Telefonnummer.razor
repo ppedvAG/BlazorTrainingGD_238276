@@ -1,8 +1,7 @@
-﻿<input @bind="Nummer" @bind:event="oninput" type="range" min="1" max="99999999" class="form-range" />
+﻿<input @bind="Nummerintern" @bind:event="oninput" type="range" min="1" max="99999999" class="form-range" />
 @Nummer
 @code {
-
-
+    int Nummerintern;
 
     private int _Nummer;
     [Parameter]
@@ -11,7 +10,7 @@
         get { return _Nummer; }
         set
         {
-            _Nummer = value;
+            _Nummer = Nummerintern;
             NummerChanged.InvokeAsync(value);
         }
     }
