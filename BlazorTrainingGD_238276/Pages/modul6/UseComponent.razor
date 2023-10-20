@@ -1,0 +1,23 @@
+﻿@page "/para"
+<h3>UseComponent</h3>
+<CascadingValue Value="43" Name="dieWahrheit">
+    <CascadingValue Value="42">
+
+
+        <Component MyProperty="42" MyProp2="@vari"
+                   width="100px" style="background-color:azure" hannes="egal" data-hannes="egal">
+              @*      <input @bind="vari"/>
+                   <h3>Childcontent</h3> *@
+                   <Body>
+                       <p>tolles Html <br />
+                       tolle Azubis!    
+                       </p>
+                   </Body>
+                   <BodyZwei><input type="checkbox" /></BodyZwei>
+        </Component>
+    </CascadingValue>
+</CascadingValue>
+@code {
+    string vari = "42";
+
+}

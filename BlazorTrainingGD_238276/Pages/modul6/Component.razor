@@ -1,0 +1,34 @@
+﻿<h3>Component @BodyZwei</h3>
+@MyProperty
+<hr />
+@MyProp2
+<div @attributes="@AllesAndere">
+    halllo @MyCascading2
+    @* @ChildContent *@
+    @Body
+</div>
+@code {
+    [Parameter]
+    public int MyProperty { get; set; }
+    [Parameter]
+    [EditorRequired]
+    public string MyProp2 { get; set; }
+
+
+    [Parameter(CaptureUnmatchedValues =true)]
+    public Dictionary<string,object> AllesAndere { get; set; }
+
+    [CascadingParameter]
+    public int MyCascading { get; set; }
+
+    [CascadingParameter(Name = "dieWahrheit")]
+    public int MyCascading2 { get; set; }
+
+    // [Parameter] KONVENTION!!!
+    // public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment Body { get; set; }
+
+    [Parameter]
+    public RenderFragment BodyZwei { get; set; }
+}
