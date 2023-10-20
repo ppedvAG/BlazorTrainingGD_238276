@@ -1,0 +1,21 @@
+﻿<input @bind="Nummer" @bind:event="oninput" type="range" min="1" max="99999999" class="form-range" />
+@Nummer
+@code {
+
+
+
+    private int _Nummer;
+    [Parameter]
+    public int Nummer
+    {
+        get { return _Nummer; }
+        set
+        {
+            _Nummer = value;
+            NummerChanged.InvokeAsync(value);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<int> NummerChanged { get; set; }
+}
