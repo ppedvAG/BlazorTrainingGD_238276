@@ -1,0 +1,39 @@
+﻿@page "/js"
+@inject IJSRuntime JsRuntime
+<h3>JSComponent</h3>
+<button @onclick="click">click </button>
+<button @onclick="click1">Localstorage </button>
+<button @onclick="click2">window. </button>
+<button @onclick="click3">module </button>
+@ausgabe
+@code {
+    void click()
+    {
+        JsRuntime.InvokeVoidAsync("alert", "Nachricht");
+    }
+
+    void click1()
+    {//localStorage.setItem("lastname", "Smith");
+        JsRuntime.InvokeVoidAsync("localStorage.setItem", "Passwort","1234");
+    }
+    void click2()
+    {
+        JsRuntime.InvokeVoidAsync("window.hannes", "Nachricht");
+    }
+
+    string ausgabe;
+    async Task click3()
+    {
+     
+      ausgabe= await  module.InvokeAsync<string>("hannes", "nachricht");
+    }
+    IJSObjectReference module;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+          module= await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./pages/modul8/JSComponent.razor.js");
+        }
+    }
+
+}
