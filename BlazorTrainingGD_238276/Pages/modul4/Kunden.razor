@@ -1,5 +1,6 @@
 ﻿@page "/kunden"
 @using Models
+@using  Microsoft.EntityFrameworkCore
 @inject NorthwindContext db
 <h3>Kunden</h3>
 <div class="row">
@@ -22,11 +23,19 @@
             <div class="col">
                 <ul class="list-group list-group-flush">
 
-                    @foreach (var item in db.Customers.Where(x=>x.CompanyName.Contains(Eingabe)))
+                    @foreach (var item in db.Customers.Include(x=>x.Orders).Where(x => x.CompanyName.Contains(Eingabe)).Take(200))
                     {
                         <li class="list-group-item" @key="item.CustomerId">
-                            @item.CompanyName
+                            @item.CompanyName <span class="float-end">@item.Orders.Count</span>
+                            <ul class="list-group list-group-flush">
+                                @foreach (var item2 in item.Orders)
+                                {
+                                     <li class="list-group-item" >
+                                         @item2.OrderDate @item2.OrderId
+                                     </li>
+                                }
 
+                            </ul>
                         </li>
                     }
 
@@ -38,4 +47,9 @@
 </div>
 @code {
     string Eingabe = "";
+    protected override void OnInitialized()
+    {
+        
+
+    }
 }
