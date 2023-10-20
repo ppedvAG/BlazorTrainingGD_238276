@@ -1,6 +1,9 @@
 ﻿@page "/person/{id:int?}"
 <h3>PersonEdit</h3>
-<EditForm Model="VM" OnSubmit="save">
+@* <EditForm Model="VM" OnSubmit="save">
+ *@    
+ 
+ <EditForm EditContext="VMctx" OnSubmit="save">
     <DataAnnotationsValidator></DataAnnotationsValidator>
 
     <div class="mb-3 row">
@@ -41,13 +44,19 @@
 @code {
     [Parameter]
     public int id { get; set; }
-    Person VM = new Person() {GebDat=DateTime.Now };
+    Person VM = new Person() { GebDat = DateTime.Now };
+    EditContext VMctx;
     void save(EditContext ctx)
     {
         if (ctx.Validate())
         {
-            
+
         }
-        
+
+    }
+    protected override void OnInitialized()
+    {
+        VMctx = new EditContext(VM);
+        VMctx.SetFieldCssClassProvider(new BootstrapFixFieldCssClassProvider());
     }
 }
